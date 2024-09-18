@@ -1,25 +1,26 @@
 const router = require("express").Router();
 const Todo = require("../../models/todo");
 
-router.get("/", (req, res) => {
-  const todo = Todo.find({});
-  return res.status(200).json({ msg: "todo get method is working", todos });
+router.get("/", async (req, res) => {
+  const todos = await Todo.find({});
+  return res.status(200).json(todos);
 });
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   const { data } = req.body;
+  await Todo.create({ task: data, completed: false });
   return res.status(200).json({ msg: "todo post method is working", data });
 });
 
-router.put("/:id", (req, res) => {
-  const { id } = req.params;
-
+router.put("/:id", async (req, res) => {
+  const { id, completed } = req.params;
+  await Todo.findByIdAndUpdate(id, { completed });
   return res.status(200).json({ msg: "todo put method is working", id });
 });
 
-router.delete("/:id", (req, res) => {
-  const { id } = req.params;
-
+router.delete("/:id", async (req, res) => {
+  const { id, completed } = req.params;
+  await Todo.findByIdAndDelete(id);
   return res.status(200).json({ msg: "todo delete method is working", id });
 });
 

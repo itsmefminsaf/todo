@@ -7,7 +7,18 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Hello, world!!</h1>
+    <main>
+      <header>
+        <h1>Todo</h1>
+        <h4>List your tasks..</h4>
+        <input type="text" placeholder="Your task..." id="todoinput" />
+        <button onclick="addTodo()">Add new</button>
+      </header>
+      <section>
+        <ul class="todos" id="todos"></ul>
+      </section>
+      <footer></footer>
+    </main>
   </body>
   <script src="script.js"></script>
 </html>
